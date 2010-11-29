@@ -10,6 +10,8 @@ module Fjomp
       def acts_as_attachment(*args)
         options = args.extract_options!
         send :include, InstanceMethods
+
+        after_create :move_uploaded_file_to_final_path
       end
     end
 
@@ -26,7 +28,7 @@ module Fjomp
 
       # After an attachment has been stored in the database, copy the
       # file from the temporary upload location to its final directory
-      def after_create
+      def move_uploaded_file_to_final_path
         FileUtils.mkpath(base_directory)
 
         File.open(path, "wb") do |f|

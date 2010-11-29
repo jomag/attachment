@@ -1,2 +1,2 @@
-require 'jom_attachment.rb'
+require 'fjomp_attachment.rb'
 
